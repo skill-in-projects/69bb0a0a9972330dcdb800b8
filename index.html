@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RapidMind - Project Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="foundations.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans', var(--font-family-sans), sans-serif;
+            background: #EDEEF3;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 24px;
+            color: #292C33;
+        }
+        .page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 32px;
+            max-width: 1152px;
+            width: 100%;
+        }
+        .board-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            width: 100%;
+        }
+        .project-logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80px;
+            height: 60px;
+            background: transparent;
+            color: #292C33;
+            font-size: 24px;
+            overflow: hidden;
+        }
+        .project-logo img { width: 100%; height: 100%; object-fit: contain; }
+        .project-logo-placeholder { color: #292C33; }
+        .board-header h1 {
+            font-family: 'Fira Code', monospace;
+            font-weight: 400;
+            font-size: 32px;
+            line-height: 36px;
+            text-align: center;
+            color: #292C33;
+        }
+        .welcome {
+            font-family: 'Noto Sans', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 22px;
+            text-align: center;
+            color: #292C33;
+        }
+        .description {
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 16px;
+            line-height: 22px;
+            text-align: center;
+            color: #292C33;
+            max-width: 666px;
+        }
+        .panel-label {
+            font-family: 'Fira Code', monospace;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 24px;
+            color: #292C33;
+            text-align: center;
+            width: 100%;
+            margin-bottom: 2px;
+            display: block;
+        }
+        .panel {
+            width: 100%;
+            max-width: 1152px;
+            background: #fff;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            border: 1px solid #DADEE6;
+        }
+        .frontend-panel-text { color: #6b7280; font-size: 16px; line-height: 22px; margin-bottom: 16px; text-align: center; }
+        .frontend-buttons { display: flex; flex-wrap: wrap; gap: 12px; }
+        .backend-intro { font-family: 'Noto Sans', sans-serif; font-size: 16px; line-height: 22px; color: #6b7280; margin-bottom: 16px; text-align: center; }
+        .api-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; }
+        .api-table th { padding: 0.75rem; text-align: left; border-bottom: 2px solid #e2e8f0; background: #f1f5f9; font-family: 'Noto Sans', sans-serif; font-size: 16px; color: #292C33; }
+        .api-table td { padding: 0.75rem; border-bottom: 1px solid #e2e8f0; font-family: 'Noto Sans', sans-serif; font-size: 16px; color: #000; }
+        #response { margin: 0; padding: 0; min-height: 0; display: inline; }
+        .btn-test-api {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 6px 16px; min-height: 34px; background: #3D76FF; color: #FFFFFF;
+            font-family: 'Noto Sans', sans-serif; font-weight: 400; font-size: 16px; line-height: 22px;
+            border: none; border-radius: 20px; cursor: pointer;
+        }
+        .btn-test-api:disabled { background: #CED3DE; color: #000000; cursor: not-allowed; }
+        .api-result.success { color: #08957E; font-weight: 700; font-size: 16px; line-height: 22px; background: none; border: none; }
+        #response.api-result.success { background: none; border: none; }
+        .footer {
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid #DADEE6;
+            color: #292C33;
+            font-size: 14px;
+            text-align: left;
+        }
+        .made-with-skill-in { display: block; margin: 0; max-height: 20px; height: auto; }
+        @media (max-width: 600px) {
+            .board-header h1 { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <header class="board-header">
+            <div class="project-logo"><img src="data:image/png;base64,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" alt="Organization" class="project-logo-img" /></div>
+            <h1>RapidMind</h1>
+            <p class="welcome">Welcome to your project's default landing page!</p>
+            <p class="description">This page is hosted on GitHub Pages and is ready to showcase your project to the world. As you develop your prototype, this page will evolve into your final product presentation.</p>
+        </header>
+
+        <h2 class="panel-label">Frontend</h2>
+        <div class="panel">
+            <p class="frontend-panel-text">As you progress through the project, add buttons to this panel. Each button should link to one of the project's modules.<br><br>Later in the project, you'll be asked to replace this default landing page with the final product's landing page<br><br>(don't worry 😊 we'll guide you when it's time.)</p>
+            <div class="frontend-buttons"></div>
+        </div>
+
+        <h2 class="panel-label">Backend</h2>
+        <div class="panel">
+            <p class="backend-intro">The following APIs are pre-configured, free to use, and already included in your default repository,<br><br>so you can start using them right away.</p>
+            <table class="api-table">
+            <thead>
+                <tr>
+                    <th>API Name</th>
+                    <th>API Description</th>
+                    <th style="text-align: center;">Test</th>
+                    <th>Response</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Database Connectivity</strong></td>
+                    <td>REST API and database connectivity (TestProjects CRUD).</td>
+                    <td style="text-align: center;"><button id="testButton" type="button" onclick="testBackend()" class="btn-test-api">Test API</button></td>
+                    <td style="min-width: 120px;"><span id="response"></span></td>
+                </tr>
+                <tr>
+                    <td><strong>Google Geocoding API</strong></td>
+                    <td>Convert addresses to coordinates (and reverse).</td>
+                    <td style="text-align: center;"><button type="button" onclick="testGoogleApi('geocoding')" class="btn-test-api">Test API</button></td>
+                    <td style="min-width: 120px;"><span id="geocodingResponse" class="api-result"></span></td>
+                </tr>
+                <tr>
+                    <td><strong>Google Maps JavaScript API</strong></td>
+                    <td>Display maps in the browser. Test validates Maps JavaScript API.</td>
+                    <td style="text-align: center;"><button type="button" onclick="testGoogleApi('maps')" class="btn-test-api">Test API</button></td>
+                    <td style="min-width: 120px;"><span id="mapsResponse" class="api-result"></span></td>
+                </tr>
+                <tr>
+                    <td><strong>Google Places API (New)</strong></td>
+                    <td>Search places and get place details.</td>
+                    <td style="text-align: center;"><button type="button" onclick="testGoogleApi('places')" class="btn-test-api">Test API</button></td>
+                    <td style="min-width: 120px;"><span id="placesResponse" class="api-result"></span></td>
+                </tr>
+                <tr>
+                    <td><strong>Google Directions API</strong></td>
+                    <td>Routes and directions between addresses.</td>
+                    <td style="text-align: center;"><button type="button" onclick="testGoogleApi('directions')" class="btn-test-api">Test API</button></td>
+                    <td style="min-width: 120px;"><span id="directionsResponse" class="api-result"></span></td>
+                </tr>
+                <tr>
+                    <td><strong>Google Gemini API</strong></td>
+                    <td>Generative AI (LLM).</td>
+                    <td style="text-align: center;"><button type="button" onclick="testGoogleApi('gemini')" class="btn-test-api">Test API</button></td>
+                    <td style="min-width: 120px;"><span id="geminiResponse" class="api-result"></span></td>
+                </tr>
+                <tr>
+                    <td><strong>Google Cloud Speech-to-Text API</strong></td>
+                    <td>Speech recognition (audio to text).</td>
+                    <td style="text-align: center;"><button type="button" onclick="testGoogleApi('speech-to-text')" class="btn-test-api">Test API</button></td>
+                    <td style="min-width: 120px;"><span id="speechResponse" class="api-result"></span></td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+        <div class="footer">
+            <img src="data:image/png;base64,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" alt="Made with Skill-in" class="made-with-skill-in" />
+        </div>
+    </div>
+    <script>
+        // Load config.js and ensure it's available
+        let configLoaded = false;
+        const configScript = document.createElement('script');
+        configScript.src = 'config.js';
+        configScript.onload = function() {
+            configLoaded = true;
+            console.log('✅ config.js loaded successfully');
+            console.log('📋 CONFIG:', typeof CONFIG !== 'undefined' ? CONFIG : 'CONFIG not defined');
+            console.log('📋 window.CONFIG:', typeof window !== 'undefined' && window.CONFIG ? window.CONFIG : 'window.CONFIG not defined');
+        };
+        configScript.onerror = function() {
+            console.error('❌ Failed to load config.js');
+            configLoaded = false;
+        };
+        document.head.appendChild(configScript);
+    </script>
+    <script>
+        // Debug: Log config on load
+        window.addEventListener('DOMContentLoaded', function() {
+            console.log('📋 Config loaded:', typeof CONFIG !== 'undefined' ? CONFIG : 'CONFIG not defined');
+            console.log('📋 window.CONFIG:', typeof window !== 'undefined' && window.CONFIG ? window.CONFIG : 'window.CONFIG not defined');
+            console.log('📋 API_URL from config:', typeof CONFIG !== 'undefined' ? CONFIG?.API_URL : (window.CONFIG?.API_URL || 'not found'));
+        });
+        
+        async function testBackend() {
+            const button = document.getElementById('testButton');
+            const responseDiv = document.getElementById('response');
+            
+            button.disabled = true;
+            button.textContent = 'Loading...';
+            responseDiv.className = '';
+            responseDiv.textContent = '';
+            
+            try {
+                // Wait a moment for config.js to load if it hasn't yet
+                if (!configLoaded) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
+                
+                // Try multiple ways to access CONFIG (handle scope issues)
+                let config = typeof CONFIG !== 'undefined' ? CONFIG : (typeof window !== 'undefined' && window.CONFIG ? window.CONFIG : null);
+                let apiUrl = config?.API_URL || '';
+                
+                console.log('🔍 CONFIG object:', config);
+                console.log('🔍 Original API_URL from config:', apiUrl);
+                console.log('🔍 typeof CONFIG:', typeof CONFIG);
+                console.log('🔍 window.CONFIG:', typeof window !== 'undefined' ? window.CONFIG : 'window not available');
+                console.log('🔍 configLoaded flag:', configLoaded);
+                
+                if (!apiUrl) {
+                    const errorMsg = 'API URL not configured in config.js. ' +
+                        'CONFIG object: ' + JSON.stringify(config) + 
+                        ', window.CONFIG: ' + JSON.stringify(typeof window !== 'undefined' ? window.CONFIG : 'N/A') +
+                        ', configLoaded: ' + configLoaded;
+                    throw new Error(errorMsg);
+                }
+                
+                // Ensure HTTPS for Railway domains (fix Mixed Content errors)
+                if (apiUrl.includes('railway.app')) {
+                    if (apiUrl.startsWith('http://')) {
+                        apiUrl = apiUrl.replace('http://', 'https://');
+                        console.warn('⚠️ Converted HTTP to HTTPS for Railway domain');
+                    }
+                    if (!apiUrl.startsWith('https://')) {
+                        apiUrl = 'https://' + apiUrl.replace(/^https?:\/\//, '');
+                        console.warn('⚠️ Added HTTPS protocol to Railway domain');
+                    }
+                }
+                
+                // Remove trailing slash from base URL if present
+                apiUrl = apiUrl.replace(/\/$/, '');
+                console.log('✅ Final API_URL (after normalization):', apiUrl);
+                
+                // Add trailing slash to prevent Railway redirect (Railway redirects /api/test to /api/test/)
+                // This prevents Railway from redirecting HTTPS to HTTP
+                const fullUrl = apiUrl + '/api/test/';
+                console.log('🌐 Attempting to fetch:', fullUrl);
+                console.log('🌐 Full URL type check:', typeof fullUrl, 'Starts with https?:', fullUrl.startsWith('https://'));
+                
+                // Check if URL is a Railway project URL (not a service URL)
+                if (apiUrl.includes('railway.app/project/')) {
+                    responseDiv.className = 'error';
+                    responseDiv.innerHTML = `
+                        <strong>❌ Configuration Error:</strong><br>
+                        <strong>The API URL is pointing to a Railway project page, not a service URL.</strong><br><br>
+                        <strong>Current URL:</strong> <code>${apiUrl}</code><br><br>
+                        <strong>Issue:</strong><br>
+                        Railway project pages (<code>railway.app/project/...</code>) are not API endpoints.<br>
+                        Your backend service needs to be deployed first to get a real API URL.<br><br>
+                        <strong>Solution:</strong><br>
+                        1. Deploy your backend code to Railway (push to GitHub and connect to Railway)<br>
+                        2. After deployment, Railway will generate a service URL like: <code>https://your-service-name.railway.app</code><br>
+                        3. Update <code>config.js</code> with the actual service URL<br>
+                        4. The service URL can be found in Railway dashboard: Service → Settings → Domains<br><br>
+                        <strong>Note:</strong> The backend code already includes CORS configuration, so once deployed with the correct URL, it will work.
+                    `;
+                    console.error('Invalid API URL (Railway project URL):', apiUrl);
+                    return;
+                }
+                
+                // Final validation - ensure URL is definitely HTTPS
+                if (!fullUrl.startsWith('https://')) {
+                    throw new Error('❌ CRITICAL: URL is not HTTPS! URL: ' + fullUrl);
+                }
+                
+                let response;
+                try {
+                    // Use fetch with explicit options
+                    console.log('📡 Making fetch request with explicit options...');
+                    console.log('📡 Full URL before fetch (stringified):', String(fullUrl));
+                    console.log('📡 Full URL type:', typeof fullUrl);
+                    console.log('📡 Full URL startsWith https?:', String(fullUrl).startsWith('https://'));
+                    
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+                    
+                    // Create URL object to ensure it's valid and has correct protocol
+                    const urlObj = new URL(fullUrl);
+                    console.log('📡 URL object protocol:', urlObj.protocol);
+                    console.log('📡 URL object href:', urlObj.href);
+                    
+                    // Force HTTPS protocol
+                    if (urlObj.protocol !== 'https:') {
+                        urlObj.protocol = 'https:';
+                        console.warn('⚠️ FORCED protocol to HTTPS:', urlObj.href);
+                    }
+                    
+                    const finalFetchUrl = urlObj.href;
+                    console.log('📡 Final fetch URL:', finalFetchUrl);
+                    
+                    response = await fetch(finalFetchUrl, {
+                        method: 'GET',
+                        mode: 'cors',
+                        credentials: 'omit',
+                        redirect: 'error', // Fail on redirect to catch HTTPS->HTTP redirects
+                        signal: controller.signal,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+                    
+                    clearTimeout(timeoutId);
+                    console.log('✅ Fetch completed, status:', response.status, 'Final URL:', response.url);
+                } catch (fetchError) {
+                    // Network error - check if it's a CORS error or connection error
+                    const isCorsError = fetchError.message.includes('CORS') || 
+                                       (fetchError.name === 'TypeError' && fetchError.message.includes('Failed to fetch'));
+                    
+                    let errorDetails = '';
+                    if (isCorsError) {
+                        errorDetails = `
+                            <strong>❌ CORS Error:</strong><br>
+                            <strong>The API server is not allowing requests from this origin.</strong><br><br>
+                            <strong>Details:</strong><br>
+                            • URL: <code>${fullUrl}</code><br>
+                            • Origin: <code>${window.location.origin}</code><br>
+                            • Error: ${fetchError.message}<br><br>
+                            <strong>Possible causes:</strong><br>
+                            • Backend CORS is not configured correctly<br>
+                            • Service is not deployed or offline<br>
+                            • Wrong API URL (might be pointing to project page instead of service)<br><br>
+                            <strong>Note:</strong> If your backend is deployed, make sure CORS allows your GitHub Pages domain.<br>
+                        `;
+                    } else {
+                        errorDetails = `
+                            <strong>❌ Connection Error:</strong><br>
+                            <strong>Cannot connect to the API server</strong><br><br>
+                            <strong>Details:</strong><br>
+                            • URL: <code>${fullUrl}</code><br>
+                            • Error: ${fetchError.message}<br><br>
+                            <strong>Possible causes:</strong><br>
+                            • Railway service is not deployed yet<br>
+                            • Service is offline or crashed<br>
+                            • Network connectivity problem<br>
+                            • Wrong API URL<br><br>
+                            <strong>Next steps:</strong><br>
+                            1. Check Railway dashboard - is the service deployed?<br>
+                            2. Check service logs in Railway<br>
+                            3. Verify the API URL in config.js is the service URL (not project URL)<br>
+                            4. Service URL should be like: <code>https://your-service-name.railway.app</code><br>
+                        `;
+                    }
+                    
+                    responseDiv.className = 'error';
+                    responseDiv.innerHTML = errorDetails;
+                    console.error('Fetch error:', fetchError);
+                    return;
+                }
+                
+                console.log('Response status:', response.status, response.statusText);
+                
+                if (response.ok) {
+                    responseDiv.className = 'api-result success';
+                    responseDiv.innerHTML = '<span style="color: #08957E; font-weight: 700;">Successful</span>';
+                } else {
+                    // HTTP error response
+                    let errorText = '';
+                    try {
+                        errorText = await response.text();
+                    } catch (e) {
+                        errorText = 'Could not read error response';
+                    }
+                    
+                    responseDiv.className = 'error';
+                    responseDiv.innerHTML = `
+                        <strong>❌ API Error:</strong><br>
+                        <strong>HTTP Status: ${response.status} ${response.statusText}</strong><br><br>
+                        <strong>URL:</strong> <code>${fullUrl}</code><br>
+                        <strong>Response:</strong> <pre>${errorText.substring(0, 200)}</pre>
+                    `;
+                    console.error('API error:', response.status, errorText);
+                }
+            } catch (error) {
+                responseDiv.className = 'error';
+                responseDiv.innerHTML = `
+                    <strong>❌ Unexpected Error:</strong><br>
+                    <strong>${error.name || 'Error'}:</strong> ${error.message}<br><br>
+                    <strong>Stack trace:</strong><br>
+                    <pre style="font-size: 10px; max-height: 200px; overflow: auto;">${error.stack || 'No stack trace available'}</pre>
+                `;
+                console.error('Unexpected error:', error);
+            } finally {
+                button.disabled = false;
+                button.textContent = 'Test API';
+            }
+        }
+        
+        async function testGoogleApi(apiSlug) {
+            const idMap = { geocoding: 'geocodingResponse', maps: 'mapsResponse', places: 'placesResponse', directions: 'directionsResponse', gemini: 'geminiResponse', 'speech-to-text': 'speechResponse' };
+            const div = document.getElementById(idMap[apiSlug]);
+            if (!div) return;
+            div.className = 'api-result';
+            div.textContent = 'Loading...';
+            try {
+                if (!configLoaded) await new Promise(r => setTimeout(r, 100));
+                let config = typeof CONFIG !== 'undefined' ? CONFIG : (typeof window !== 'undefined' && window.CONFIG ? window.CONFIG : null);
+                let apiUrl = config?.API_URL || '';
+                if (!apiUrl) {
+                    div.className = 'api-result error';
+                    div.innerHTML = '<span class="error">API URL not configured.</span>';
+                    return;
+                }
+                apiUrl = apiUrl.replace(/\/$/, '');
+                if (apiUrl.includes('railway.app') && apiUrl.startsWith('http://')) apiUrl = apiUrl.replace('http://', 'https://');
+                const url = apiUrl + '/api/google/' + apiSlug;
+                const res = await fetch(url, { method: 'GET', mode: 'cors', credentials: 'omit', headers: { 'Accept': 'application/json' }});
+                const data = await res.json();
+                if (data.status === 'ok') {
+                    div.className = 'api-result success';
+                    div.innerHTML = '<span style="color: #08957E; font-weight: 700;">Successful</span>';
+                } else {
+                    div.className = 'api-result error';
+                    div.innerHTML = '<span class="error">' + (data.message || data.status || 'Failed') + '</span>';
+                }
+            } catch (error) {
+                div.className = 'api-result error';
+                div.innerHTML = '<span class="error">' + (error.message || error) + '</span>';
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</body>
+</html>
